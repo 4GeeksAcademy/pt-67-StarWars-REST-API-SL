@@ -147,17 +147,31 @@ def create_planetas():
 def delete_planeta(planeta_id):
     
     user = Planetas.query.filter_by(id=planeta_id).first()
+    if not user:
+        response_body = {
+            "error": "Planet not found",
+        }
+        return jsonify(response_body), 400
+    
     db.session.delete(user)
     db.session.commit()
 
     response_body = {
         "msg": "OK",
     }
+    
+    return jsonify(response_body), 200
 
 @app.route('/personajes/<int:personaje_id>', methods=['DELETE'])
 def delete_personaje(personaje_id):
     
     user = Personajes.query.filter_by(id=personaje_id).first()
+    if not user:
+        response_body = {
+            "error": "Personaje not found",
+        }
+        return jsonify(response_body), 400
+    
     db.session.delete(user)
     db.session.commit()
 
@@ -172,13 +186,18 @@ def delete_personaje(personaje_id):
 def delete_vehiculo(vehiculo_id):
     
     user = Vehiculos.query.filter_by(id=vehiculo_id).first()
+    if not user:
+        response_body = {
+            "error": "Vehiculot not found",
+        }
+        return jsonify(response_body), 400
+    
     db.session.delete(user)
     db.session.commit()
 
     response_body = {
         "msg": "OK",
     }
-
 
     return jsonify(response_body), 200
 
@@ -186,6 +205,12 @@ def delete_vehiculo(vehiculo_id):
 def delete_user(user_id):
     
     user = User.query.filter_by(id=user_id).first()
+    if not user:
+        response_body = {
+            "error": "User not found",
+        }
+        return jsonify(response_body), 400
+    
     db.session.delete(user)
     db.session.commit()
 
@@ -193,8 +218,8 @@ def delete_user(user_id):
         "msg": "OK",
     }
 
-
     return jsonify(response_body), 200
+
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
