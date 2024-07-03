@@ -17,3 +17,43 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+    
+class Personajes(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String(250), nullable=False)
+    eye_color = db.Column(db.String(250), nullable=False)
+    hair_color = db.Column(db.String(250), nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "eye_color": self.eye_color,
+            "hair_color": self.hair_color,
+        }
+    
+class Vehiculos(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String(250), nullable=False)
+    model = db.Column(db.String(250), nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "model": self.model,
+        }
+    
+class Planetas(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String(250), nullable=False)
+    population = db.Column(db.String(250), nullable=False)
+
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "population": self.population,
+        }
+    
